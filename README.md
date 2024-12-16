@@ -1,9 +1,9 @@
-# Custom Java Utilities Library
+# JExtensions
 
 [![GitHub License](https://img.shields.io/github/license/floriande/jextensions)
 ](LICENSE)
 
-A custom Java library that simplifies your development process by providing frequently used functions, algorithms, and utilities. Designed to reduce boilerplate code, this library is a handy toolset for any Java project. It includes utilities for file locking, random selection, assertion helpers, and array operations. 
+JExtensions is a custom Java library that simplifies your development process by providing frequently used functions, algorithms, and utilities. Designed to reduce boilerplate code, this library is a handy toolset for any Java project. It includes utilities for file locking, random selection, assertion helpers, and array operations. 
 
 Additionally, precompiled GitHub packages are available for seamless integration with Maven or Gradle.
 
