@@ -3,8 +3,8 @@ package de.florian.jextensions.math.distribution;
 import de.florian.jextensions.math.distribution.random.picker.BinarySearchRandomSelector;
 import de.florian.jextensions.math.distribution.random.picker.LinearSearchRandomSelector;
 import de.florian.jextensions.math.distribution.random.picker.VoseAliasRandomSelector;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DistributionCollectionTest {
 
@@ -25,7 +25,7 @@ public class DistributionCollectionTest {
     private List<String> collect;
     private Map<String, Double> map;
 
-    @Before
+    @BeforeEach
     public void init() {
         collect = IntStream.range(1, SPEED_TEST_ELEMENT_SIZE).mapToObj(String::valueOf).collect(Collectors.toList());
         map = IntStream.range(1, SPEED_TEST_ELEMENT_SIZE).mapToObj(String::valueOf).collect(Collectors.toMap(Function.identity(), e -> 1.0));
