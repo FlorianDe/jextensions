@@ -8,6 +8,8 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class SingleInstanceLock {
     private static final Logger log = LoggerFactory.getLogger(SingleInstanceLock.class);
@@ -16,13 +18,16 @@ public class SingleInstanceLock {
     private FileChannel lockFileChannel;
     private FileLock lock;
 
-    private final String uniquePermanentFileIdentifier = this.getClass().getPackage().getName().replace(".", "_") + "_" + SingleInstanceLock.class.getSimpleName() + ".tmp";
-
+    private static final String uniquePermanentFileIdentifier = SingleInstanceLock.class.getPackage().getName().replace(".", "_") + "_" + SingleInstanceLock.class.getSimpleName() + ".tmp";
+    
+    public static Path getLockFilePath(){
+        return Paths.get(System.getProperty("java.io.tmpdir"), uniquePermanentFileIdentifier);
+    }
+    @SuppressWarnings("resource")
     public boolean isSingleInstanceRunning() {
         try {
-            String directory = System.getProperty("java.io.tmpdir");
-            lockFile = new File(directory, uniquePermanentFileIdentifier);
-            log.debug("Using \"" + lockFile + "\" file as lock file!");
+            lockFile = getLockFilePath().toFile();
+            log.info("Using \"" + lockFile + "\" file as lock file!");
             lockFileChannel = new RandomAccessFile(lockFile, "rw").getChannel();
 
             try {
@@ -37,11 +42,12 @@ public class SingleInstanceLock {
                 closeLock();
                 return true;
             }
-
+ 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 closeLock();
-                deleteFile();
+                deleteLockFile();
             }));
+            log.info("No other instance is running, added hook to clean up lockfile when exiting!");
             return false;
         } catch (Exception e) {
             closeLock();
@@ -61,7 +67,7 @@ public class SingleInstanceLock {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void deleteFile() {
+    private void deleteLockFile() {
         try {
             lockFile.delete();
         } catch (Exception ignored) {
