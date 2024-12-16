@@ -1,7 +1,12 @@
 # JExtensions
-
+[![CI Build](https://github.com/FlorianDe/jextensions/actions/workflows/build.yml/badge.svg)](https://github.com/FlorianDe/jextensions/actions/workflows/build.yml)
+[![CI Test](https://github.com/FlorianDe/jextensions/actions/workflows/test.yml/badge.svg)](https://github.com/FlorianDe/jextensions/actions/workflows/test.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/FlorianDe/jextensions?label=Version)](https://github.com/FlorianDe/jextensions/releases)
+[![GitHub commits since latest release](https://img.shields.io/github/commits-since/FlorianDe/jextensions/latest)
+](https://github.com/FlorianDe/jextensions/commits/main/)
 [![GitHub License](https://img.shields.io/github/license/floriande/jextensions)
 ](LICENSE)
+
 
 JExtensions is a custom Java library that simplifies your development process by providing frequently used functions, algorithms, and utilities. Designed to reduce boilerplate code, this library is a handy toolset for any Java project. It includes utilities for file locking, random selection, assertion helpers, and array operations. 
 
